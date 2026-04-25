@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assessment Sheet — Implied Consent to the Arbitration Agreement</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #fafaf7;
+    --ink: #1a1815;
+    --ink-soft: #4a4640;
+    --ink-faint: #8b857b;
+    --rule: #d4cfc4;
+    --rule-soft: #e6e1d6;
+    --accent: #7a3b2e;
+    --accent-soft: #b8867a;
+    --highlight: #f0e8d8;
+    --threshold: #c9b67e;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: #ebe7dd;
+    font-family: 'Inter', sans-serif;
+    color: var(--ink);
+    font-size: 13px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body { padding: 32px 16px; display: flex; justify-content: center; }
+
+  .sheet {
+    width: 210mm;
+    min-height: 297mm;
+    background: var(--paper);
+    padding: 16mm 14mm;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.04);
+  }
+
+  /* HEADER */
+  .header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1.5px solid var(--ink);
+    margin-bottom: 14px;
+  }
+
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .title-block h1 {
+    font-family: 'EB Garamond', serif;
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+  }
+
+  .title-block .subtitle {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-top: 4px;
+  }
+
+  .meta {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 4px 10px;
+    align-items: end;
+  }
+
+  .meta-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.5px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    padding-bottom: 2px;
+  }
+
+  .meta-input {
+    font-family: 'EB Garamond', serif;
+    font-size: 12px;
+    border: none;
+    border-bottom: 1px solid var(--rule);
+    background: transparent;
+    padding: 2px 0;
+    width: 200px;
+    color: var(--ink);
+    transition: border-color 0.15s;
+  }
+
+  .meta-input:focus { outline: none; border-bottom-color: var(--accent); }
+
+  /* INSTRUCTION */
+  .instruction {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 11px;
+    color: var(--ink-faint);
+    text-align: center;
+    margin: 0 0 8px 0;
+    letter-spacing: 0.01em;
+  }
+
+  /* TABLE */
+  .table-head {
+    display: grid;
+    grid-template-columns: 22px 1fr 145px 1fr 38px;
+    gap: 8px;
+    align-items: end;
+    padding: 0 0 5px 0;
+    border-bottom: 1px solid var(--ink);
+  }
+
+  .col-head {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.5px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+  }
+
+  .col-head.center { text-align: center; }
+  .col-head.right { text-align: right; }
+
+  .row {
+    display: grid;
+    grid-template-columns: 22px 1fr 145px 1fr 38px;
+    gap: 8px;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px solid var(--rule-soft);
+    min-height: 30px;
+    transition: background 0.15s;
+  }
+
+  .row:hover { background: rgba(122, 59, 46, 0.025); }
+  .row.is-active { background: rgba(122, 59, 46, 0.04); }
+  .row.added { background: rgba(201, 182, 126, 0.05); }
+  .row.added:hover { background: rgba(201, 182, 126, 0.10); }
+
+  .col-letter {
+    font-family: 'EB Garamond', serif;
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--accent);
+    text-align: center;
+    line-height: 1;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.1s;
+    position: relative;
+  }
+
+  .col-letter:hover {
+    transform: scale(1.1);
+  }
+
+  .col-letter.dimmed { color: var(--ink-faint); }
+
+  .col-letter input {
+    width: 22px;
+    border: none;
+    background: transparent;
+    text-align: center;
+    font-family: 'EB Garamond', serif;
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--accent);
+    padding: 0;
+    cursor: text;
+  }
+
+  .col-letter input:focus { outline: none; }
+
+  .col-letter input::placeholder {
+    color: var(--ink-faint);
+    font-weight: 300;
+    opacity: 0.5;
+  }
+
+  .col-description {
+    font-family: 'EB Garamond', serif;
+    font-size: 12px;
+    color: var(--ink);
+    line-height: 1.2;
+    padding-right: 4px;
+  }
+
+  .col-description input {
+    width: 100%;
+    border: none;
+    border-bottom: 1px dotted var(--rule);
+    background: transparent;
+    font-family: 'EB Garamond', serif;
+    font-size: 12px;
+    color: var(--ink);
+    padding: 1px 0;
+    font-style: italic;
+  }
+
+  .col-description input::placeholder {
+    color: var(--ink-faint);
+    opacity: 0.6;
+  }
+
+  .col-description input:focus {
+    outline: none;
+    border-bottom-color: var(--accent);
+  }
+
+  /* SLIDER */
+  .scale {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    height: 22px;
+  }
+
+  .scale-bound {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.5px;
+    color: var(--ink-faint);
+    min-width: 22px;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .scale-track {
+    position: relative;
+    flex: 1;
+    height: 22px;
+    cursor: pointer;
+  }
+
+  .scale-track::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--ink-faint);
+    transform: translateY(-50%);
+  }
+
+  .scale-tick {
+    position: absolute;
+    top: 50%;
+    width: 1px;
+    height: 5px;
+    background: var(--ink-faint);
+    transform: translate(-50%, -50%);
+  }
+
+  .scale-tick.center {
+    height: 9px;
+    background: var(--ink);
+    width: 1.5px;
+  }
+
+  .scale-handle {
+    position: absolute;
+    top: 50%;
+    width: 11px;
+    height: 11px;
+    background: var(--accent);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    cursor: grab;
+    transition: opacity 0.15s, transform 0.1s;
+    z-index: 2;
+    border: 2px solid var(--paper);
+    box-shadow: 0 0 0 1px var(--accent);
+  }
+
+  .scale-handle.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .scale-handle:active {
+    cursor: grabbing;
+    transform: translate(-50%, -50%) scale(1.15);
+  }
+
+  /* When inactive, dim the entire scale */
+  .row.absent .scale-track {
+    opacity: 0.45;
+  }
+
+  /* Track for added rows whose α is not yet set */
+  .scale-track.alpha-undefined {
+    cursor: default;
+  }
+
+  .scale-track.alpha-undefined::before {
+    border-top: 1px dashed var(--ink-faint);
+    background: transparent;
+    height: 0;
+  }
+
+  .scale-alpha-input {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 36px;
+    height: 16px;
+    border: none;
+    border-bottom: 1px solid var(--accent);
+    background: var(--paper);
+    text-align: center;
+    font-family: 'EB Garamond', serif;
+    font-size: 11px;
+    font-style: italic;
+    color: var(--accent);
+    padding: 0 2px;
+    z-index: 3;
+    /* hide spinners */
+    -moz-appearance: textfield;
+    appearance: textfield;
+  }
+  .scale-alpha-input::-webkit-outer-spin-button,
+  .scale-alpha-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .scale-alpha-input::placeholder {
+    color: var(--ink-faint);
+    font-style: italic;
+  }
+  .scale-alpha-input:focus {
+    outline: none;
+    border-bottom-color: var(--accent);
+  }
+
+  .col-justification input {
+    width: 100%;
+    border: none;
+    border-bottom: 1px dotted var(--rule);
+    background: transparent;
+    font-family: 'EB Garamond', serif;
+    font-size: 11.5px;
+    font-style: italic;
+    color: var(--ink-soft);
+    padding: 1px 0;
+  }
+
+  .col-justification input::placeholder {
+    color: var(--ink-faint);
+    opacity: 0.55;
+  }
+
+  .col-justification input:focus {
+    outline: none;
+    border-bottom-color: var(--accent);
+  }
+
+  .col-score {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    font-weight: 500;
+    color: var(--ink);
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .col-score.empty {
+    color: var(--ink-faint);
+    opacity: 0.4;
+  }
+
+  /* Section divider */
+  .added-header {
+    grid-column: 1 / -1;
+    padding: 12px 0 4px 0;
+    margin-top: 4px;
+    border-top: 1px dashed var(--rule);
+    border-bottom: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.5px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    background: transparent !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .add-btn {
+    background: transparent;
+    border: 1px solid var(--rule);
+    color: var(--ink-soft);
+    padding: 3px 9px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.15s;
+    border-radius: 0;
+  }
+
+  .add-btn:hover {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+
+  .add-btn::before {
+    content: '+';
+    margin-right: 4px;
+    font-weight: 600;
+  }
+
+  .remove-btn {
+    position: absolute;
+    right: -18px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: var(--ink-faint);
+    font-size: 11px;
+    cursor: pointer;
+    padding: 4px;
+    line-height: 1;
+    opacity: 0;
+    transition: opacity 0.15s, color 0.15s;
+  }
+
+  .row.added:hover .remove-btn {
+    opacity: 1;
+  }
+
+  .remove-btn:hover {
+    color: var(--accent);
+  }
+
+  .row.added {
+    position: relative;
+  }
+
+  /* When no added rows exist, the empty state */
+  .added-empty {
+    text-align: center;
+    padding: 8px 0;
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 11px;
+    color: var(--ink-faint);
+    border-bottom: 1px solid var(--rule-soft);
+  }
+
+  /* TOTAL */
+  .total {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1.5px solid var(--ink);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .total-label-block {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .total-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .total-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.5px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    width: 75px;
+  }
+
+  .position-bar-wrapper {
+    flex: 1;
+    position: relative;
+    height: 24px;
+  }
+
+  .position-bar {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--ink);
+    transform: translateY(-50%);
+  }
+
+  .position-bar-tick {
+    position: absolute;
+    top: 50%;
+    width: 1px;
+    height: 6px;
+    background: var(--ink-faint);
+    transform: translate(-50%, -50%);
+  }
+
+  .position-bar-tick.major {
+    height: 9px;
+    background: var(--ink);
+  }
+
+  .position-bar-threshold {
+    position: absolute;
+    top: 50%;
+    left: 37.25%;
+    width: 1.5px;
+    height: 18px;
+    background: var(--threshold);
+    transform: translate(-50%, -50%);
+    z-index: 1;
+  }
+
+  .position-bar-threshold-label {
+    position: absolute;
+    top: -10px;
+    left: 37.25%;
+    transform: translateX(-50%);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7.5px;
+    color: #9c8a4f;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    font-weight: 500;
+  }
+
+  .position-bar-marker {
+    position: absolute;
+    top: 50%;
+    width: 14px;
+    height: 14px;
+    background: var(--accent);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    border: 2px solid var(--paper);
+    box-shadow: 0 0 0 1px var(--accent);
+    transition: left 0.3s cubic-bezier(0.2, 0, 0, 1);
+    opacity: 0;
+  }
+
+  .position-bar-marker.visible { opacity: 1; }
+
+  .position-numbers {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    color: var(--ink-faint);
+    font-variant-numeric: tabular-nums;
+    margin-top: 2px;
+    margin-left: 87px; /* aligns with position bar */
+  }
+
+  .total-display {
+    text-align: right;
+    border-left: 1.5px solid var(--ink);
+    padding-left: 18px;
+    min-width: 110px;
+  }
+
+  .total-display .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.5px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .total-display .value {
+    font-family: 'EB Garamond', serif;
+    font-size: 38px;
+    font-weight: 500;
+    color: var(--accent);
+    line-height: 0.9;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* FOOTER */
+  .footer {
+    margin-top: 14px;
+    padding-top: 10px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    color: var(--ink-faint);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .footer .actions { display: flex; gap: 8px; }
+
+  .btn {
+    background: transparent;
+    border: 1px solid var(--ink);
+    color: var(--ink);
+    padding: 5px 11px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.5px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .btn:hover { background: var(--ink); color: var(--paper); }
+
+  .btn.primary { background: var(--ink); color: var(--paper); }
+  .btn.primary:hover { background: var(--accent); border-color: var(--accent); }
+
+  /* Print */
+  @media print {
+    @page { size: A4 portrait; margin: 0; }
+    html, body { background: white; padding: 0; }
+    .sheet {
+      box-shadow: none;
+      width: 210mm;
+      min-height: 297mm;
+      padding: 12mm 11mm;
+    }
+    .footer .actions, .instruction { display: none; }
+    .meta-input,
+    .col-description input,
+    .col-justification input {
+      border-bottom: 1px solid var(--rule);
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="sheet">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="title-block">
+      <div class="eyebrow">Assessment sheet</div>
+      <h1>Implied Consent to the Arbitration Agreement</h1>
+      <div class="subtitle">An empirical model for assessing non-signatory conduct</div>
+    </div>
+    <div class="meta">
+      <div class="meta-label">Case</div><input type="text" class="meta-input" id="meta-case">
+      <div class="meta-label">Date</div><input type="text" class="meta-input" id="meta-date">
+      <div class="meta-label">Law</div><input type="text" class="meta-input" id="meta-law">
+      <div class="meta-label">Assessor</div><input type="text" class="meta-input" id="meta-assessor">
+    </div>
+  </div>
+
+  <p class="instruction">Click a circumstance letter or its scale to activate; drag the marker to set its weight.</p>
+
+  <!-- TABLE -->
+  <div class="table-head">
+    <div class="col-head center">Circ</div>
+    <div class="col-head">Description</div>
+    <div class="col-head center">Sliding scale</div>
+    <div class="col-head">Justification</div>
+    <div class="col-head right">Score</div>
+  </div>
+
+  <div id="rows-container"></div>
+
+  <!-- TOTAL & POSITION -->
+  <div class="total">
+    <div class="total-label-block">
+      <div class="total-row">
+        <div class="total-eyebrow">Position</div>
+        <div class="position-bar-wrapper">
+          <div class="position-bar"></div>
+          <div class="position-bar-tick major" style="left: 0%"></div>
+          <div class="position-bar-tick" style="left: 10%"></div>
+          <div class="position-bar-tick" style="left: 20%"></div>
+          <div class="position-bar-tick" style="left: 30%"></div>
+          <div class="position-bar-tick" style="left: 40%"></div>
+          <div class="position-bar-tick" style="left: 50%"></div>
+          <div class="position-bar-tick" style="left: 60%"></div>
+          <div class="position-bar-tick" style="left: 70%"></div>
+          <div class="position-bar-tick" style="left: 80%"></div>
+          <div class="position-bar-tick" style="left: 90%"></div>
+          <div class="position-bar-tick major" style="left: 100%"></div>
+          <div class="position-bar-threshold-label">empirical threshold ≈ 37</div>
+          <div class="position-bar-threshold"></div>
+          <div class="position-bar-marker" id="position-marker" style="left: 0%"></div>
+        </div>
+      </div>
+      <div class="position-numbers">
+        <span>0</span><span>20</span><span>40</span><span>60</span><span>80</span><span>100</span>
+      </div>
+    </div>
+    <div class="total-display">
+      <div class="label">Aggregate</div>
+      <div class="value" id="total-value">0</div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div>Romanó Pedroso · Weighing conduct · 2026</div>
+    <div class="actions">
+      <button class="btn" onclick="resetSheet()">Reset</button>
+      <button class="btn primary" onclick="window.print()">Print / save PDF</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const CIRCUMSTANCES = [
+    { letter: 'A', alpha: 6,  desc: 'Conceived and/or structured the transaction' },
+    { letter: 'B', alpha: 4,  desc: 'Made, received, or accepted the offer' },
+    { letter: 'C', alpha: 8,  desc: 'Participated in the negotiations' },
+    { letter: 'D', alpha: 7,  desc: 'Terms presupposed its consent or participation' },
+    { letter: 'E', alpha: 5,  desc: 'Guaranteed the signatory\u2019s performance' },
+    { letter: 'F', alpha: 10, desc: 'Performed contractual obligations' },
+    { letter: 'G', alpha: 3,  desc: 'Supervised performance of the contract' },
+    { letter: 'H', alpha: 4,  desc: 'Performed activities incidental to the contract' },
+    { letter: 'I', alpha: 6,  desc: 'Sent correspondence in its own name' },
+    { letter: 'J', alpha: 5,  desc: 'Hosted contract-related meetings' },
+    { letter: 'K', alpha: 2,  desc: 'Shared executives with the signatory' },
+    { letter: 'L', alpha: 4,  desc: 'Signatory was operationally dependent on it' },
+    { letter: 'M', alpha: 4,  desc: 'Participated in a prior or parallel dispute' },
+    { letter: 'N', alpha: 6,  desc: 'Participated in the dispute now arbitrated' },
+    { letter: 'O', alpha: 4,  desc: 'Proposed a substitute contract' },
+    { letter: 'P', alpha: 10, desc: 'Referred to itself as a party to the contract' },
+    { letter: 'Q', alpha: 9,  desc: 'Counterparty treated it as a party' },
+  ];
+
+  const NUM_ADDED_ROWS = 0; // start with no additional rows; user adds them on demand
+
+  const state = CIRCUMSTANCES.map(c => ({
+    letter: c.letter,
+    alpha: c.alpha,
+    desc: c.desc,
+    descCustom: '',
+    present: false,
+    value: c.alpha,
+    justification: '',
+    isAdded: false,
+  }));
+
+  function addCircumstance() {
+    state.push({
+      letter: '',
+      alpha: null,  // user will set
+      desc: '',
+      descCustom: '',
+      present: true,  // immediately active when added
+      value: 0,
+      justification: '',
+      isAdded: true,
+    });
+    buildRows();
+    updateTotal();
+    // Focus the new letter input
+    setTimeout(() => {
+      const inputs = document.querySelectorAll('.row.added .col-letter input');
+      if (inputs.length) inputs[inputs.length - 1].focus();
+    }, 50);
+  }
+
+  function removeCircumstance(idx) {
+    state.splice(idx, 1);
+    buildRows();
+    updateTotal();
+  }
+
+  function buildRows() {
+    const container = document.getElementById('rows-container');
+    container.innerHTML = '';
+
+    let separatorAdded = false;
+    let addedAny = false;
+
+    state.forEach((s, idx) => {
+      // Insert separator + add button before first added row, OR after last standard row
+      if (s.isAdded && !separatorAdded) {
+        const sep = document.createElement('div');
+        sep.className = 'added-header';
+        sep.innerHTML = '<span>Additional circumstances</span>';
+        const addBtn = document.createElement('button');
+        addBtn.className = 'add-btn';
+        addBtn.textContent = 'Add';
+        addBtn.onclick = addCircumstance;
+        sep.appendChild(addBtn);
+        container.appendChild(sep);
+        separatorAdded = true;
+      }
+      if (s.isAdded) addedAny = true;
+
+      const row = document.createElement('div');
+      row.className = 'row';
+      if (s.present) row.classList.add('is-active');
+      else row.classList.add('absent');
+      if (s.isAdded) row.classList.add('added');
+      row.dataset.idx = idx;
+
+      // Column 1: letter
+      const colLetter = document.createElement('div');
+      colLetter.className = 'col-letter';
+      if (!s.present && !s.isAdded) colLetter.classList.add('dimmed');
+
+      if (s.isAdded) {
+        const letterInput = document.createElement('input');
+        letterInput.type = 'text';
+        letterInput.value = s.letter;
+        letterInput.maxLength = 2;
+        letterInput.placeholder = '+';
+        letterInput.addEventListener('input', e => {
+          s.letter = e.target.value.toUpperCase();
+          updateTotal();
+        });
+        colLetter.appendChild(letterInput);
+
+        // Add remove button
+        const removeBtn = document.createElement('button');
+        removeBtn.className = 'remove-btn';
+        removeBtn.innerHTML = '✕';
+        removeBtn.title = 'Remove this circumstance';
+        removeBtn.onclick = (e) => {
+          e.stopPropagation();
+          removeCircumstance(idx);
+        };
+        row.appendChild(removeBtn);
+      } else {
+        colLetter.textContent = s.letter;
+        colLetter.title = 'Click to activate / deactivate';
+        colLetter.addEventListener('click', () => {
+          s.present = !s.present;
+          if (!s.present) s.value = s.alpha;
+          buildRows();
+          updateTotal();
+        });
+      }
+      row.appendChild(colLetter);
+
+      // Column 2: description
+      const colDesc = document.createElement('div');
+      colDesc.className = 'col-description';
+      if (s.isAdded) {
+        const descInput = document.createElement('input');
+        descInput.type = 'text';
+        descInput.value = s.descCustom;
+        descInput.placeholder = 'Describe the circumstance';
+        descInput.addEventListener('input', e => { s.descCustom = e.target.value; });
+        colDesc.appendChild(descInput);
+      } else {
+        colDesc.textContent = s.desc;
+      }
+      row.appendChild(colDesc);
+
+      // Column 3: sliding scale
+      row.appendChild(buildScale(s, idx));
+
+      // Column 4: justification
+      const colJust = document.createElement('div');
+      colJust.className = 'col-justification';
+      const justInput = document.createElement('input');
+      justInput.type = 'text';
+      justInput.value = s.justification;
+      justInput.placeholder = '';
+      justInput.addEventListener('input', e => { s.justification = e.target.value; });
+      colJust.appendChild(justInput);
+      row.appendChild(colJust);
+
+      // Column 5: score
+      const colScore = document.createElement('div');
+      colScore.className = 'col-score';
+      // For added rows without α, show — even if "present"
+      const hasUsableValue = s.present && (!s.isAdded || s.alpha);
+      if (hasUsableValue) {
+        colScore.textContent = formatScore(s.value);
+      } else {
+        colScore.textContent = '—';
+        colScore.classList.add('empty');
+      }
+      row.appendChild(colScore);
+
+      container.appendChild(row);
+    });
+
+    // If no added rows, show the section header with just the + button
+    if (!separatorAdded) {
+      const sep = document.createElement('div');
+      sep.className = 'added-header';
+      sep.innerHTML = '<span>Additional circumstances</span>';
+      const addBtn = document.createElement('button');
+      addBtn.className = 'add-btn';
+      addBtn.textContent = 'Add';
+      addBtn.onclick = addCircumstance;
+      sep.appendChild(addBtn);
+      container.appendChild(sep);
+    }
+  }
+
+  function buildScale(s, idx) {
+    const wrap = document.createElement('div');
+    wrap.className = 'scale';
+
+    // For added rows without alpha, show alpha input and disable the track
+    const alphaUndefined = s.isAdded && (s.alpha === null || s.alpha === undefined);
+
+    const min = alphaUndefined ? 0 : s.alpha / 2;
+    const max = alphaUndefined ? 0 : s.alpha * 1.5;
+
+    // Low label
+    const lowLabel = document.createElement('div');
+    lowLabel.className = 'scale-bound';
+    lowLabel.textContent = alphaUndefined ? '—' : formatScore(min);
+    wrap.appendChild(lowLabel);
+
+    // Track
+    const track = document.createElement('div');
+    track.className = 'scale-track';
+    if (alphaUndefined) track.classList.add('alpha-undefined');
+
+    const tickLow = document.createElement('div');
+    tickLow.className = 'scale-tick';
+    tickLow.style.left = '0%';
+    track.appendChild(tickLow);
+
+    const tickMid = document.createElement('div');
+    tickMid.className = 'scale-tick center';
+    tickMid.style.left = '50%';
+    track.appendChild(tickMid);
+
+    const tickHigh = document.createElement('div');
+    tickHigh.className = 'scale-tick';
+    tickHigh.style.left = '100%';
+    track.appendChild(tickHigh);
+
+    // If alpha is undefined, show an input centered on the track for the user to set α
+    if (alphaUndefined) {
+      const alphaInput = document.createElement('input');
+      alphaInput.type = 'number';
+      alphaInput.className = 'scale-alpha-input';
+      alphaInput.placeholder = 'α';
+      alphaInput.min = '1';
+      alphaInput.max = '20';
+      alphaInput.step = '0.5';
+      alphaInput.title = 'Set the base parameter value (α) for this circumstance';
+      alphaInput.addEventListener('input', e => {
+        const v = parseFloat(e.target.value);
+        if (!isNaN(v) && v > 0) {
+          s.alpha = v;
+          s.value = v; // start at base
+          buildRows();
+          updateTotal();
+        }
+      });
+      track.appendChild(alphaInput);
+    } else {
+      // Handle (only when alpha is defined)
+      const handle = document.createElement('div');
+      handle.className = 'scale-handle';
+      if (!s.present) handle.classList.add('hidden');
+
+      const pct = ((s.value - min) / (max - min)) * 100;
+      handle.style.left = Math.max(0, Math.min(100, pct)) + '%';
+      track.appendChild(handle);
+
+      // Interactive (only when alpha is defined)
+      let isDragging = false;
+
+      const setFromX = (clientX) => {
+        const rect = track.getBoundingClientRect();
+        const x = clientX - rect.left;
+        let pctNew = (x / rect.width) * 100;
+        pctNew = Math.max(0, Math.min(100, pctNew));
+        const newValue = min + (pctNew / 100) * (max - min);
+        s.value = Math.round(newValue * 4) / 4;
+        handle.style.left = pctNew + '%';
+        handle.classList.remove('hidden');
+        if (!s.present) {
+          s.present = true;
+          buildRows();
+        }
+        const row = track.closest('.row');
+        if (row) {
+          const scoreCol = row.querySelector('.col-score');
+          if (scoreCol) {
+            scoreCol.textContent = formatScore(s.value);
+            scoreCol.classList.remove('empty');
+          }
+        }
+        updateTotal();
+      };
+
+      track.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        setFromX(e.clientX);
+        e.preventDefault();
+      });
+
+      document.addEventListener('mousemove', (e) => {
+        if (isDragging) setFromX(e.clientX);
+      });
+
+      document.addEventListener('mouseup', () => {
+        if (isDragging) {
+          isDragging = false;
+          buildRows();
+        }
+      });
+
+      track.addEventListener('touchstart', (e) => {
+        isDragging = true;
+        setFromX(e.touches[0].clientX);
+      }, { passive: true });
+
+      track.addEventListener('touchmove', (e) => {
+        if (isDragging) setFromX(e.touches[0].clientX);
+      }, { passive: true });
+
+      track.addEventListener('touchend', () => {
+        if (isDragging) { isDragging = false; buildRows(); }
+      });
+    }
+
+    wrap.appendChild(track);
+
+    // High label
+    const highLabel = document.createElement('div');
+    highLabel.className = 'scale-bound';
+    highLabel.textContent = alphaUndefined ? '—' : formatScore(max);
+    wrap.appendChild(highLabel);
+
+    return wrap;
+  }
+
+  function formatScore(v) {
+    if (v === 0) return '0';
+    if (Math.round(v) === v) return String(v);
+    return v.toFixed(2).replace(/\.?0+$/, '');
+  }
+
+  function updateRow(idx) {
+    // simple full rebuild for safety
+    buildRows();
+  }
+
+  function updateTotal() {
+    let total = 0;
+    state.forEach(s => {
+      if (s.isAdded) {
+        // count only if user has named it AND set α
+        if (s.letter && s.present && s.alpha) total += s.value;
+      } else if (s.present) {
+        total += s.value;
+      }
+    });
+    document.getElementById('total-value').textContent = formatScore(total);
+    const marker = document.getElementById('position-marker');
+    const pct = Math.max(0, Math.min(100, total));
+    marker.style.left = pct + '%';
+    if (total > 0) marker.classList.add('visible');
+    else marker.classList.remove('visible');
+  }
+
+  function resetSheet() {
+    if (!confirm('Reset all values?')) return;
+    // Remove all added rows
+    for (let i = state.length - 1; i >= 0; i--) {
+      if (state[i].isAdded) state.splice(i, 1);
+    }
+    // Reset standard rows
+    state.forEach(s => {
+      s.present = false;
+      s.value = s.alpha;
+      s.justification = '';
+    });
+    document.querySelectorAll('.meta-input').forEach(el => el.value = '');
+    buildRows();
+    updateTotal();
+  }
+
+  buildRows();
+  updateTotal();
+</script>
+
+</body>
+</html>
